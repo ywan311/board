@@ -1,5 +1,6 @@
-package com.board.Entity;
+package com.board.Entity.Board;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,4 +21,9 @@ public class Board {
     @Column
     String content;
 
+    @Builder
+    public Board(String title, String content) {
+        this.title =title;
+        this.content = content;
+    }
 }
