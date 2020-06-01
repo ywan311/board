@@ -1,33 +1,34 @@
 package com.board.Controller.Board;
 
+import com.board.DTO.Board.BoardListResDto;
 import com.board.DTO.Board.BoardSaveReqDto;
+import com.board.DTO.Board.BoardUpdateReqDto;
 import com.board.Service.Board.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequiredArgsConstructor
-public class BoardController {
+public class BoardController {//rest api controller
     private final BoardService boardService;
     //CRUD
-    @PostMapping("board/save")
-    public String save(BoardSaveReqDto boardSaveReqDto){
-        System.out.println(boardSaveReqDto.toString());
-        Long id = boardService.save(boardSaveReqDto);
-        return "redirect:board";
+    @GetMapping("api/v1/board")
+    public List<BoardListResDto> getList(){
+        return boardService.findAll();
     }
-    @GetMapping("board")
-    public ModelAndView list(ModelAndView mv){
-        boardService.findAll().stream().map(boardListResDto -> mv.addObject(boardListResDto.getId().toString(),boardListResDto));
-        mv.setViewName("board");
-        return mv;
+    @PostMapping("api/v1/board")
+    public Long add(@RequestBody BoardSaveReqDto dto){
+        return boardService.save(dto);
     }
-    @GetMapping("board/save")
-    public ModelAndView getSave(){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("board-save");
-        return mv;
+    @PutMapping("api/v1/board/{id}")
+    public Long update(@RequestBody BoardUpdateReqDto dto,@PathVariable Long id){
+        return boardService.update(id, dto);
+    }
+    @DeleteMapping("api/v1/board/{id}")
+    public Long delete(@PathVariable Long id){
+        boardService.delete(id);
+        return id;
     }
 }
