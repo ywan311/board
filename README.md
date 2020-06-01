@@ -1,2 +1,5 @@
 # board
-게시판을 만들어보자
+
+### Spring boot+ JPA + mustached
+
+-board 테이블 먼저 완성
