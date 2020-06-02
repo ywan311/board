@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 public class BoardListResDto {
@@ -12,12 +13,11 @@ public class BoardListResDto {
     private String title;
     private String content;
     private String createdAt;
-    private SimpleDateFormat format = new SimpleDateFormat("MM/dd HH:mm");
 
     public BoardListResDto(Board entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.content = entity.getContent();
-        this.createdAt = format.format(entity.getCreatedAt());
+        this.createdAt = entity.getCreatedAt().format(DateTimeFormatter.ofPattern("MM/dd HH:mm"));
     }
 }
