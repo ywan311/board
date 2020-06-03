@@ -3,8 +3,6 @@ package com.board.DTO.Board;
 import com.board.Entity.Board.Board;
 import lombok.Getter;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
