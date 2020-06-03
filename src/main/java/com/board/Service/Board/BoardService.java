@@ -28,7 +28,6 @@ public class BoardService {
     public Long update(Long id, BoardUpdateReqDto dto ){
         Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("게시글이 없습니다."));
         board.update(dto.getTitle(),dto.getContent());
-        System.out.println(board);
         return id;
     }
     //삭제
