@@ -23,6 +23,7 @@ public class IndexController {
 
     @GetMapping("board/update/{id}")
     public String updateBoard(@PathVariable Long id,Model model){
+        model.addAttribute("board",boardService.findOne(id));
         return "board-update";
     }
 }
